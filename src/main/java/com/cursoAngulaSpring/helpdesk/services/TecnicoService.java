@@ -14,6 +14,8 @@ import com.cursoAngulaSpring.helpdesk.repositories.PessoaReposiroty;
 import com.cursoAngulaSpring.helpdesk.repositories.TecnicoReposiroty;
 import com.cursoAngulaSpring.helpdesk.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TecnicoService {
 	@Autowired
@@ -34,6 +36,15 @@ public class TecnicoService {
 		Tecnico newTec = new Tecnico(tecDTO);
 		return repositorio.save(newTec);
 	}
+	
+	public Tecnico update(Integer id, @Valid TecnicoDTO tecDTO) {
+		tecDTO.setId(id);
+		Tecnico oldTec = findById(id);
+		validaPorCPFeEmail(tecDTO);
+		oldTec = new Tecnico(tecDTO);
+		return repositorio.save(oldTec);
+	}
+	
 	private void validaPorCPFeEmail(TecnicoDTO tecDTO) {
 		Optional<Pessoa> obj = pessoaRepositorio.findByCpf(tecDTO.getCpf());
 		if(obj.isPresent() && obj.get().getId() != tecDTO.getId()) {
@@ -45,4 +56,5 @@ public class TecnicoService {
 			throw new DataIntegrityViolationException("Email já cadastrado no sistema!!");
 		}
 	}
+	
 } 
