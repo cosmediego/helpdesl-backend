@@ -2,8 +2,10 @@ package com.cursoAngulaSpring.helpdesk.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.cursoAngulaSpring.helpdesk.domain.enums.Perfil;
+import com.cursoAngulaSpring.helpdesk.dtos.TecnicoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -33,6 +35,17 @@ public class Tecnico extends Pessoa{
 
 	public void setChamados(List<Chamado> chamados) {
 		this.chamados = chamados;
+	}
+	
+	public Tecnico(TecnicoDTO tecDTO) {
+		super();
+		this.id = tecDTO.getId();
+		this.nome = tecDTO.getNome();
+		this.cpf = tecDTO.getCpf();
+		this.email = tecDTO.getEmail();
+		this.senha = tecDTO.getSenha();
+		this.perfis = tecDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.dataCriacao = tecDTO.getDataCriacao();
 	}
 	
 }
