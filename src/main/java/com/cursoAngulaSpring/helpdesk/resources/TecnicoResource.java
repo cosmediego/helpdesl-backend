@@ -19,6 +19,8 @@ import com.cursoAngulaSpring.helpdesk.domain.Tecnico;
 import com.cursoAngulaSpring.helpdesk.dtos.TecnicoDTO;
 import com.cursoAngulaSpring.helpdesk.services.TecnicoService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping(value="/tecnicos")
@@ -41,7 +43,7 @@ public class TecnicoResource {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TecnicoDTO> create(@RequestBody TecnicoDTO tecDTO){
+	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO tecDTO){
 		Tecnico newTecnico = service.create(tecDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newTecnico.getId()).toUri();
 		return ResponseEntity.created(uri).build();
