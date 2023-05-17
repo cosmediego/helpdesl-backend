@@ -37,12 +37,13 @@ public class DBService {
 		Cliente cli2 = new Cliente(null, "João Batista", "73499478870", "joaobatista@email.com", "123");
 		
 		Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado_01", "Primeiro chamado", tec1, cli1);
-		
+		Chamado c2 = new Chamado(null, Prioridade.ALTA, Status.ABERTO, "Chamado_02", "Segundo chamado", tec2, cli2);
+		  
 		
 	
 		tecnicoReposiroty.saveAll(Arrays.asList(tec1, tec2));
 		clienteReposiroty.saveAll(Arrays.asList(cli1, cli2));
-		chamadoReposiroty.saveAll(Arrays.asList(c1));
+		chamadoReposiroty.saveAll(Arrays.asList(c1, c2));
 	}
 
 }
