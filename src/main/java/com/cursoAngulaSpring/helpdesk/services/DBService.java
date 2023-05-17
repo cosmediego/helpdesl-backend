@@ -3,7 +3,6 @@ package com.cursoAngulaSpring.helpdesk.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.cursoAngulaSpring.helpdesk.domain.Chamado;
@@ -35,12 +34,14 @@ public class DBService {
 		
 		Cliente cli1 = new Cliente(null, "Linus Torval", "81415473480", "torval@email.com", "123");
 		
+		Cliente cli2 = new Cliente(null, "João Batista", "73499478870", "joaobatista@email.com", "123");
+		
 		Chamado c1 = new Chamado(null, Prioridade.MEDIA, Status.ANDAMENTO, "Chamado_01", "Primeiro chamado", tec1, cli1);
 		
 		
 	
 		tecnicoReposiroty.saveAll(Arrays.asList(tec1, tec2));
-		clienteReposiroty.saveAll(Arrays.asList(cli1));
+		clienteReposiroty.saveAll(Arrays.asList(cli1, cli2));
 		chamadoReposiroty.saveAll(Arrays.asList(c1));
 	}
 

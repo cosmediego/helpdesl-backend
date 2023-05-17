@@ -37,15 +37,15 @@ public class Tecnico extends Pessoa{
 		this.chamados = chamados;
 	}
 	
-	public Tecnico(TecnicoDTO tecDTO) {
+	public Tecnico(TecnicoDTO tecnico) {
 		super();
-		this.id = tecDTO.getId();
-		this.nome = tecDTO.getNome();
-		this.cpf = tecDTO.getCpf();
-		this.email = tecDTO.getEmail();
-		this.senha = tecDTO.getSenha();
-		this.perfis = tecDTO.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
-		this.dataCriacao = tecDTO.getDataCriacao();
+		this.id = tecnico.getId();
+		this.nome = tecnico.getNome();
+		this.cpf = tecnico.getCpf();
+		this.email = tecnico.getEmail();
+		this.senha = tecnico.getSenha();
+		this.perfis = tecnico.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
+		this.dataCriacao = tecnico.getDataCriacao();
 	}
 	
 }
