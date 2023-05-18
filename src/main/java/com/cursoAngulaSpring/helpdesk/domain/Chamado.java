@@ -62,7 +62,7 @@ public class Chamado implements Serializable {
 		return id;
 	}
 
-	public void setIs(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
