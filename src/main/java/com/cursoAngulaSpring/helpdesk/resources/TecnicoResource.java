@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +46,7 @@ public class TecnicoResource {
 		return ResponseEntity.ok(listDTO);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<TecnicoDTO> create(@Valid @RequestBody TecnicoDTO tecDTO){
 		Tecnico newTecnico = service.create(tecDTO);
@@ -58,6 +60,7 @@ public class TecnicoResource {
 		return ResponseEntity.ok().body(new TecnicoDTO(tec));
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value= "/{id}")
 	public ResponseEntity<TecnicoDTO> delete(@PathVariable Integer id){
 		service.delete(id);
