@@ -10,7 +10,7 @@ import com.cursoAngulaSpring.helpdesk.services.DBService;
 
 @Configuration
 @Profile("dev")
-public class DevConfig {
+public class DevConfig {  
 
 	@Autowired
 	private DBService dbService;
