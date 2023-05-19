@@ -3,8 +3,11 @@ package com.cursoAngulaSpring.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cursoAngulaSpring.helpdesk.domain.Pessoa;
@@ -14,7 +17,7 @@ import com.cursoAngulaSpring.helpdesk.repositories.PessoaReposiroty;
 import com.cursoAngulaSpring.helpdesk.repositories.TecnicoReposiroty;
 import com.cursoAngulaSpring.helpdesk.services.exceptions.ObjectNotFoundException;
 
-import jakarta.validation.Valid;
+
 
 @Service
 public class TecnicoService {
@@ -22,6 +25,8 @@ public class TecnicoService {
 	private TecnicoReposiroty repositorio;
 	@Autowired
 	private PessoaReposiroty pessoaRepositorio;
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> obj = repositorio.findById(id);
@@ -34,6 +39,7 @@ public class TecnicoService {
 
 	public Tecnico create(TecnicoDTO tecDTO) {
 		tecDTO.setId(null);
+		tecDTO.setSenha(encoder.encode(tecDTO.getSenha()));
 		validaPorCPFeEmail(tecDTO);
 		Tecnico newTec = new Tecnico(tecDTO);
 		return repositorio.save(newTec);

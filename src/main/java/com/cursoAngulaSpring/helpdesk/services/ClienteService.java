@@ -3,8 +3,10 @@ package com.cursoAngulaSpring.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.cursoAngulaSpring.helpdesk.domain.Pessoa;
@@ -14,7 +16,6 @@ import com.cursoAngulaSpring.helpdesk.repositories.PessoaReposiroty;
 import com.cursoAngulaSpring.helpdesk.repositories.ClienteReposiroty;
 import com.cursoAngulaSpring.helpdesk.services.exceptions.ObjectNotFoundException;
 
-import jakarta.validation.Valid;
 
 @Service
 public class ClienteService {
@@ -22,6 +23,8 @@ public class ClienteService {
 	private ClienteReposiroty repositorio;
 	@Autowired
 	private PessoaReposiroty pessoaRepositorio;
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public Cliente findById(Integer id) {
 		Optional<Cliente> obj = repositorio.findById(id);
@@ -34,6 +37,7 @@ public class ClienteService {
 
 	public Cliente create(ClienteDTO cliDTO) {
 		cliDTO.setId(null);
+		cliDTO.setSenha(encoder.encode(cliDTO.getSenha()));
 		validaPorCPFeEmail(cliDTO);
 		Cliente newTec = new Cliente(cliDTO);
 		return repositorio.save(newTec);

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import com.cursoAngulaSpring.helpdesk.domain.enums.Perfil;
 import com.cursoAngulaSpring.helpdesk.dtos.TecnicoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Tecnico extends Pessoa{
